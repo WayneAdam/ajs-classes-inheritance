@@ -1,14 +1,5 @@
 import Character from '../app';
 
-// const exampleBowman = {
-//   name: 'John',
-//   type: 'Bowman',
-//   health: 100,
-//   level: 1,
-//   attack: 25,
-//   defence: 25
-// };
-
 test.each([
   [123456, 'Bowman'],
   [null, 'Bowman'],
@@ -40,12 +31,12 @@ test.each([
 
 test.each([
   ['John', 'Bowman'],
-  ['John' , 'Swordsman'],
-  ['John' , 'Magician'],
-  ['John' , 'Daemon'],
-  ['John' , 'Undead'],
-  ['John' , 'Zombie'],
+  ['John', 'Swordsman'],
+  ['John', 'Magician'],
+  ['John', 'Daemon'],
+  ['John', 'Undead'],
+  ['John', 'Zombie'],
 ])('should create class with %s name and %i type', (name, type) => {
-  const character = new Character(name, type);
-  expect(character).toEqual(() => new Character(name, type));
+  const result = new Character(name, type);
+  expect(() => new Character(name, type)).toEqual(result);
 });
