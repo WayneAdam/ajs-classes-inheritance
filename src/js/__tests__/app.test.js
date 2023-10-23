@@ -49,24 +49,18 @@ test.each([
   expect(testCharacter).toEqual(correct);
 });
 
-// test.each([
-//   ['John', 'Bowman', 0],
-//   ['John', 'Swordsman', -5],
-//   ['John', 'Magician', 0],
-//   ['John', 'Daemon', -10],
-//   ['John', 'Undead', 0],
-//   ['John', 'Zombie', -15],
-// ])('should return error if character health lower or equally than zero', (name, type, health) => {
-//   const result = new Character(name, type);
-//   result.health = health;
-//   expect(result.levelUp()).toThrow(Error);
-// });
-
-test('should return error if character health lower or equally than zero', () => {
-  const character = new Character('John', 'Bowman');
-  character.health = 0;
-  console.log(character);
-  expect(character.levelUp()).toThrow(Error);
+test.each([
+  ['John', 'Bowman', 0],
+  ['John', 'Swordsman', -5],
+  ['John', 'Magician', 0],
+  ['John', 'Daemon', -10],
+  ['John', 'Undead', 0],
+  ['John', 'Zombie', -15],
+])('should return error if character health lower or equally than zero', (name, type, health) => {
+  const result = new Character(name, type);
+  result.health = health;
+  console.log(result);
+  expect(result.levelUp()).toThrow(Error);
 });
 
 test.each([
