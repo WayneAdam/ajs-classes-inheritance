@@ -55,7 +55,7 @@ export default class Character {
 
     this.level += 1;
     this.attack = Math.ceil(this.attack * 1.2);
-    this.defence = Math.ceil(this.attack * 1.2);
+    this.defence = Math.ceil(this.defence * 1.2);
     this.health = 100;
   }
 
