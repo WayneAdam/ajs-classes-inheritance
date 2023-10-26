@@ -56,11 +56,10 @@ test.each([
   ['John', 'Daemon', -10],
   ['John', 'Undead', 0],
   ['John', 'Zombie', -15],
-])('should return error if character health lower or equally than zero', (name, type, health) => {
+])('should return error if character health lower or equally zero', (name, type, health) => {
   const result = new Character(name, type);
   result.health = health;
-  console.log(result);
-  expect(result.levelUp()).toThrow(Error);
+  expect(() => result.levelUp()).toThrow(Error);
 });
 
 test.each([
@@ -106,6 +105,29 @@ test.each([
     name: name,
     type: type,
     health: correctHealth,
+    level: 1,
+    attack: attack,
+    defence: defence,
+  }
+  expect(result).toEqual(correct);
+});
+
+test.each([
+  ['John', 'Bowman', 25, 25, 5],
+  ['John', 'Swordsman', 40, 10, 10],
+  ['John', 'Magician', 10, 40, 20],
+  ['John', 'Daemon', 10, 40, 40],
+  ['John', 'Undead', 25, 25, 80],
+  ['John', 'Zombie', 40, 10, 100],
+])('Should concat +1 to level and increase attack and defence up to 20%', (name, type, attack, defence, points) => {
+  const result = new Character(name, type);
+  result.health = -1;
+  result.damage(points);
+
+  const correct = {
+    name: name,
+    type: type,
+    health: -1,
     level: 1,
     attack: attack,
     defence: defence,

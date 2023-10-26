@@ -50,7 +50,7 @@ export default class Character {
   /** ДЗ. Методы */
   levelUp() {
     if (this.health <= 0) {
-      throw new Error('Нельзя повысить левел умершего');
+      throw new Error('Ошибка. Нельзя повысить левел умершего');
     }
 
     this.level += 1;
