@@ -119,7 +119,7 @@ test.each([
   ['John', 'Daemon', 10, 40, 40],
   ['John', 'Undead', 25, 25, 80],
   ['John', 'Zombie', 40, 10, 100],
-])('Should concat +1 to level and increase attack and defence up to 20%', (name, type, attack, defence, points) => {
+])('Should do nothing if health of character lower than zero', (name, type, attack, defence, points) => {
   const result = new Character(name, type);
   result.health = -1;
   result.damage(points);
