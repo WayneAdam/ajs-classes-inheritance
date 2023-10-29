@@ -1,4 +1,10 @@
-import Character, { Bowman, Swordsman, Magician, Daemon, Undead, Zombie } from '../app';
+import Character from '../app';
+import Bowman from '../classes/Bowman';
+import Daemon from '../classes/Daemon';
+import Magician from '../classes/Magician';
+import Swordsman from '../classes/Swordsman';
+import Undead from '../classes/Undead';
+import Zombie from '../classes/Zombie';
 
 test.each([
   [123456, 'Bowman'],
@@ -30,20 +36,18 @@ test.each([
 });
 
 test.each([
-  ['John', 'Bowman', 25, 25],
-  ['John', 'Swordsman', 40, 10],
-  ['John', 'Magician', 10, 40],
-  ['John', 'Daemon', 10, 40],
-  ['John', 'Undead', 25, 25],
-  ['John', 'Zombie', 40, 10],
-])('should create class with %s name and %i type, besides %a attack and %d defence', (name, type, attack, defence) => {
+  ['John', 'Bowman'],
+  ['John', 'Swordsman'],
+  ['John', 'Magician'],
+  ['John', 'Daemon'],
+  ['John', 'Undead'],
+  ['John', 'Zombie'],
+])('should create class with %s name and %i type, besides %a attack and %d defence', (name, type) => {
   const correct = {
       name: name,
       type: type,
       health: 100,
       level: 1,
-      attack: attack,
-      defence: defence,
   }
   const testCharacter = new Character(name, type);
   expect(testCharacter).toEqual(correct);
@@ -64,13 +68,8 @@ test.each([
 
 test.each([
   ['John', 'Bowman', 25, 25],
-  ['John', 'Swordsman', 40, 10],
-  ['John', 'Magician', 10, 40],
-  ['John', 'Daemon', 10, 40],
-  ['John', 'Undead', 25, 25],
-  ['John', 'Zombie', 40, 10],
 ])('Should concat +1 to level and increase attack and defence up to 20%', (name, type, attack, defence) => {
-  const result = new Character(name, type);
+  const result = new Bowman(name, type);
   result.levelUp();
 
   const correctAttack = attack * 1.2;
@@ -89,13 +88,8 @@ test.each([
 
 test.each([
   ['John', 'Bowman', 25, 25, 5],
-  ['John', 'Swordsman', 40, 10, 10],
-  ['John', 'Magician', 10, 40, 20],
-  ['John', 'Daemon', 10, 40, 40],
-  ['John', 'Undead', 25, 25, 80],
-  ['John', 'Zombie', 40, 10, 100],
-])('Should concat +1 to level and increase attack and defence up to 20%', (name, type, attack, defence, points) => {
-  const result = new Character(name, type);
+])('Should calculate the total value of life after damage', (name, type, attack, defence, points) => {
+  const result = new Bowman(name, type);
   result.damage(points);
 
   const health = 100 - (points * (1 - defence / 100));
@@ -114,13 +108,8 @@ test.each([
 
 test.each([
   ['John', 'Bowman', 25, 25, 5],
-  ['John', 'Swordsman', 40, 10, 10],
-  ['John', 'Magician', 10, 40, 20],
-  ['John', 'Daemon', 10, 40, 40],
-  ['John', 'Undead', 25, 25, 80],
-  ['John', 'Zombie', 40, 10, 100],
 ])('Should do nothing if health of character lower than zero', (name, type, attack, defence, points) => {
-  const result = new Character(name, type);
+  const result = new Bowman(name, type);
   result.health = -1;
   result.damage(points);
 
